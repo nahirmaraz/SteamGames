@@ -1,13 +1,14 @@
 #Se importan las librerias a utilizar
 import pandas as pd
 from typing import Dict, Any, List
+from sklearn.metrics.pairwise import cosine_similarity
 
 games_pkl_path=r'C:\Users\Nahir\Desktop\Steamgames_API_ML\API\PKL\Consultas\games.pkl'
 items_pkl_path=r'C:\Users\Nahir\Desktop\Steamgames_API_ML\API\PKL\Consultas\items.pkl'
 review_pkl_path=r'C:\Users\Nahir\Desktop\Steamgames_API_ML\API\PKL\Consultas\review.pkl'
 games_ml_pkl_path = r'C:\Users\Nahir\Desktop\Steamgames_API_ML\API\PKL\ML\games_ml.pkl'
-cosine_sim_svd_pkl_path = r'C:\Users\Nahir\Desktop\Steamgames_API_ML\API\PKL\cosine_sim_svd.pkl'
-
+#cosine_sim_svd_pkl_path = r'C:\Users\Nahir\Desktop\Steamgames_API_ML\API\PKL\cosine_sim_svd.pkl'
+svd_matrix_pkl_path=r'C:\Users\Nahir\Desktop\Steamgames_API_ML\API\PKL\ML\svd_matrix.pkl'
 
 def UserForGenre(genero: str) -> Dict[str, Any]:
     '''
@@ -85,16 +86,18 @@ def SentimentAnalysis (developer: str):
     }
 
 
-def RecomendacionJuego( id, top_n =5 ):
+def RecommendedGames( id, top_n =5 ):
     '''
     Función que recibe el id de un juego como parámetro
     y devuelve los nombres de 5 juegos recomendados por similitud
     '''
     df_g_ML = pd.read_pickle(games_ml_pkl_path)
-    cosine_sim_svd = pd.read_pickle(cosine_sim_svd_pkl_path)
+    svd_matrix = pd.read_pickle(svd_matrix_pkl_path)
     try:
         #Se buscan el id en el DataFarme
         game_index =df_g_ML[df_g_ML['id'] == id].index[0]
+        #Se calcula la similitud del coseno en la matriz reducida
+        cosine_sim_svd = cosine_similarity(svd_matrix, svd_matrix)
         #Se obtiene la similitud con otros juegos y se enumera
         similar_games = list(enumerate(cosine_sim_svd[game_index]))
         #Se ordenan los juegos similares, por similitud de mayor a menor

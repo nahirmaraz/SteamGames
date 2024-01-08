@@ -1,5 +1,5 @@
 import pandas as pd
-from API.funciones import UserForGenre,SentimentAnalysis,RecomendacionJuego
+from API.funciones import UserForGenre,SentimentAnalysis,RecommendedGames
 from fastapi import FastAPI
 
 #Inicializamos
@@ -22,7 +22,7 @@ async def sentiment_analysis (developer:str):
 @app.get("/recommended_games/{id}", tags=['Sistema de recomendación'])
 async def recomendacion_juego(id: int, top_n: int = 5):
     # Llamar directamente a la función RecomendacionJuego con los parámetros proporcionados
-    recommended_games = RecomendacionJuego(id, top_n)
+    recommended_games = RecommendedGames(id, top_n)
         
     # Devolver los resultados como respuesta de la API
     return {"JuegosRecomendados": recommended_games.to_list()}
