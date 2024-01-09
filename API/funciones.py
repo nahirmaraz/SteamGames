@@ -3,8 +3,8 @@ import pandas as pd
 from typing import Dict, Any, List
 from sklearn.metrics.pairwise import cosine_similarity
 
-games_pkl_path=r'C:\Users\Nahir\Desktop\Steamgames_API_ML\API\PKL\Consultas\games.pkl'
-items_pkl_path=r'C:\Users\Nahir\Desktop\Steamgames_API_ML\API\PKL\Consultas\items.pkl'
+games_pkl_path=r'PKL\Consultas\games.pkl'
+items_pkl_path=r'PKL\Consultas\items.pkl'
 review_pkl_path=r'C:\Users\Nahir\Desktop\Steamgames_API_ML\API\PKL\Consultas\review.pkl'
 games_ml_pkl_path = r'C:\Users\Nahir\Desktop\Steamgames_API_ML\API\PKL\ML\games_ml.pkl'
 #cosine_sim_svd_pkl_path = r'C:\Users\Nahir\Desktop\Steamgames_API_ML\API\PKL\cosine_sim_svd.pkl'
