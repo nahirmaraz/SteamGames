@@ -3,12 +3,12 @@ import pandas as pd
 from typing import Dict, Any, List
 from sklearn.metrics.pairwise import cosine_similarity
 
-games_pkl_path=r'PKL\Consultas\games.pkl'
-items_pkl_path=r'PKL\Consultas\items.pkl'
-review_pkl_path=r'C:\Users\Nahir\Desktop\Steamgames_API_ML\API\PKL\Consultas\review.pkl'
-games_ml_pkl_path = r'C:\Users\Nahir\Desktop\Steamgames_API_ML\API\PKL\ML\games_ml.pkl'
+games_pkl_path='PKL\Consultas\games.pkl'
+items_pkl_path='PKL\Consultas\items.pkl'
+review_pkl_path='\PKL\Consultas\review.pkl'
+games_ml_pkl_path = 'PKL\ML\games_ml.pkl'
 #cosine_sim_svd_pkl_path = r'C:\Users\Nahir\Desktop\Steamgames_API_ML\API\PKL\cosine_sim_svd.pkl'
-svd_matrix_pkl_path=r'C:\Users\Nahir\Desktop\Steamgames_API_ML\API\PKL\ML\svd_matrix.pkl'
+svd_matrix_pkl_path='PKL\ML\svd_matrix.pkl'
 
 def UserForGenre(genero: str) -> Dict[str, Any]:
     '''
