@@ -3,18 +3,20 @@ from typing import Dict, Any, List
 from sklearn.metrics.pairwise import cosine_similarity
 from fastapi import FastAPI
 #Se definen las rutas de los archivos a utilizar
-games_pkl_path='API/games.pkl'
-items_pkl_path='API/items.pkl'
-review_pkl_path='API/review.pkl'
-games_ml_pkl_path = 'API/games_ml.pkl'
-svd_matrix_pkl_path='API/svd_matrix.pkl'
+games_pkl_path='API/PKL/games.pkl'
+items_pkl_path='API/PKL/items.pkl'
+review_pkl_path='API/PKL/review.pkl'
+games_ml_pkl_path = 'API/PKL/games_ml.pkl'
+svd_matrix_pkl_path='API/PKL/svd_matrix.pkl'
 #Inicializamos
 app = FastAPI()
+#Se pone un tíyulo a la API
 app.title='Steam Games'
+#Pantalla inicial
 @app.get("/", tags=['Inicio'])
 def bienvenida():
    return 'Bienvenidos'
-
+#Código segundo endpoint
 @app.get("/user_for_genre/{genero}", tags=['Consultas'])
 def UserForGenre(genero: str) -> Dict[str, Any]:
     '''
@@ -22,6 +24,7 @@ def UserForGenre(genero: str) -> Dict[str, Any]:
     y devuelve el usuario con más horas jugadas para ese género, 
     junto a la cantidad de horas jugadas.
     '''
+    #Se definen los DataFrames a utilizar
     df_games = pd.read_pickle(games_pkl_path)
     df_items2 = pd.read_pickle(items_pkl_path)
     try:
@@ -57,7 +60,7 @@ def UserForGenre(genero: str) -> Dict[str, Any]:
         return {
             'Error': f'No se encontraron usarios para el género {genero}'
         }
-
+#Código quinto endpoint
 @app.get("/sentiment_analysis/{developer}", tags=['Consultas'])
 def sentiment_analysis (developer: str):
     '''
@@ -66,6 +69,7 @@ def sentiment_analysis (developer: str):
     y una lista con la cantidad total de registros de reseñas de usuarios
     categorizados en Positive, Neutral y Negative.
     '''
+    #Se definen los DataFrames a utilizar
     df_games = pd.read_pickle(games_pkl_path)
     df_items2 = pd.read_pickle(items_pkl_path)
     df_reviews = pd.read_pickle(review_pkl_path)
@@ -91,13 +95,14 @@ def sentiment_analysis (developer: str):
     except:{
         'Error':f'No se encontraron reseñas para la empresa desarrolladora {developer}'
     }
-
+#Código endpoint del sistema de recomendación
 @app.get("/recommended_games/{id}", tags=['Sistema de recomendación'])
 def RecommendedGames( id, top_n =5 ):
     '''
     Función que recibe el id de un juego como parámetro
     y devuelve los nombres de 5 juegos recomendados por similitud
     '''
+    #Se define el DataFrame y la matriz a utilizar
     df_g_ML = pd.read_pickle(games_ml_pkl_path)
     svd_matrix = pd.read_pickle(svd_matrix_pkl_path)
     try:
@@ -119,3 +124,7 @@ def RecommendedGames( id, top_n =5 ):
     except:{
         'Error':f'No se encontraron recomendaciones para el juego con id {id}'
     }
+#Probando las funciones
+#print(RecommendedGames(761140))
+#print(UserForGenre('Indie'))
+#print(sentiment_analysis('Kotoshiro'))
