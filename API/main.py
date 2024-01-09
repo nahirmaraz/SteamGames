@@ -3,11 +3,11 @@ from typing import Dict, Any, List
 from sklearn.metrics.pairwise import cosine_similarity
 from fastapi import FastAPI
 #Se definen las rutas de los archivos a utilizar
-games_pkl_path=r'API\PKL\Consultas\games.pkl'
-items_pkl_path=r'API\PKL\Consultas\items.pkl'
-review_pkl_path=r'API\PKL\Consultas\review.pkl'
-games_ml_pkl_path = r'API\PKL\ML\games_ml.pkl'
-svd_matrix_pkl_path=r'API\PKL\ML\svd_matrix.pkl'
+games_pkl_path='API/PKL/Consultas/games.pkl'
+items_pkl_path='API/PKL/Consultas/items.pkl'
+review_pkl_path='API/PKL/Consultas/review.pkl'
+games_ml_pkl_path = 'API/PKL/ML/games_ml.pkl'
+svd_matrix_pkl_path='API/PKL/ML/svd_matrix.pkl'
 #Inicializamos
 app = FastAPI()
 app.title='Steam Games'
