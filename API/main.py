@@ -16,7 +16,7 @@ def bienvenida():
    return 'Bienvenidos'
 
 @app.get("/user_for_genre/{genero}", tags=['Consultas'])
-async def UserForGenre(genero: str) -> Dict[str, Any]:
+def UserForGenre(genero: str) -> Dict[str, Any]:
     '''
     Función que recibe un género como parámetro 
     y devuelve el usuario con más horas jugadas para ese género, 
@@ -59,7 +59,7 @@ async def UserForGenre(genero: str) -> Dict[str, Any]:
         }
 
 @app.get("/sentiment_analysis/{developer}", tags=['Consultas'])
-async def sentiment_analysis (developer: str):
+def sentiment_analysis (developer: str):
     '''
     Función que recibe el nombre de la empresa desarrolladora como parámetro
     y devuleve un diccionario con el nombre de la desarrolladora como llave
@@ -93,7 +93,7 @@ async def sentiment_analysis (developer: str):
     }
 
 @app.get("/recommended_games/{id}", tags=['Sistema de recomendación'])
-async def RecommendedGames( id, top_n =5 ):
+def RecommendedGames( id, top_n =5 ):
     '''
     Función que recibe el id de un juego como parámetro
     y devuelve los nombres de 5 juegos recomendados por similitud
